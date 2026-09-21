@@ -243,7 +243,8 @@ button {
   margin-bottom: 18px;
 }
 
-.task-form input {
+.task-form input,
+.timer-form input {
   min-width: 0;
   flex: 1;
   height: 48px;
@@ -257,11 +258,13 @@ button {
 }
 
 .task-form input::placeholder,
+.timer-form input::placeholder,
 .notes-card textarea::placeholder {
   color: #64706e;
 }
 
 .task-form input:focus,
+.timer-form input:focus,
 .notes-card textarea:focus {
   border-color: var(--border-bright);
   box-shadow: 0 0 0 3px rgba(124, 247, 212, 0.07);
@@ -287,6 +290,39 @@ button {
 
 .task-form button:active {
   transform: scale(0.96);
+}
+
+.task-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+  margin: -4px 0 16px;
+  padding: 4px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: rgba(5, 8, 11, 0.32);
+}
+
+.task-tab {
+  min-height: 38px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 650;
+  cursor: pointer;
+  transition: color 160ms ease, background 160ms ease, box-shadow 160ms ease;
+}
+
+.task-tab:hover {
+  color: var(--text);
+}
+
+.task-tab.active {
+  background: var(--surface-hover);
+  color: var(--accent);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
 }
 
 .task-list {
@@ -400,16 +436,136 @@ button {
   flex-direction: column;
 }
 
+.timer-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 88px 48px;
+  align-items: end;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.timer-field {
+  display: grid;
+  gap: 6px;
+}
+
+.timer-field label {
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 650;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.timer-form input {
+  width: 100%;
+}
+
+.timer-duration-field input {
+  padding-right: 8px;
+}
+
+.timer-add {
+  width: 48px;
+  height: 48px;
+  border: 0;
+  border-radius: 14px;
+  background: var(--accent);
+  color: #07100d;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 160ms ease, filter 160ms ease;
+}
+
+.timer-add:hover {
+  filter: brightness(1.05);
+  transform: scale(1.03);
+}
+
+.timer-list {
+  display: grid;
+  gap: 10px;
+}
+
+.timer-item {
+  padding: 15px;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  background: rgba(5, 8, 11, 0.3);
+  animation: task-in 240ms ease both;
+}
+
+.timer-item.running {
+  border-color: var(--border-bright);
+}
+
+.timer-item.complete {
+  background: rgba(124, 247, 212, 0.045);
+}
+
+.timer-item-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.timer-item-name {
+  min-width: 0;
+  overflow: hidden;
+  font-size: 0.88rem;
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.timer-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.timer-item.running .timer-meta {
+  color: var(--accent);
+}
+
+.timer-delete {
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #6c7775;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 160ms ease, background 160ms ease;
+}
+
+.timer-delete:hover {
+  background: rgba(255, 140, 140, 0.08);
+  color: var(--danger);
+}
+
+.timer-body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
 .timer-display {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex: 1;
-  margin: 12px 0 22px;
-  font-size: clamp(4rem, 10vw, 6.3rem);
+  min-width: 0;
+  font-size: clamp(2rem, 5vw, 2.75rem);
   font-variant-numeric: tabular-nums;
   font-weight: 600;
-  letter-spacing: -0.075em;
+  letter-spacing: -0.06em;
   line-height: 1;
 }
 
@@ -421,13 +577,15 @@ button {
 
 .timer-actions {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  grid-template-columns: repeat(2, minmax(62px, 1fr));
+  gap: 7px;
 }
 
 .timer-actions button {
-  min-height: 46px;
-  border-radius: 13px;
+  min-height: 36px;
+  padding: 0 11px;
+  border-radius: 10px;
+  font-size: 0.78rem;
   cursor: pointer;
   transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
 }
@@ -550,7 +708,7 @@ a:focus-visible {
   }
 
   .timer-display {
-    margin: 28px 0 32px;
+    font-size: clamp(2rem, 12vw, 3rem);
   }
 
   .task-delete {
@@ -572,7 +730,25 @@ a:focus-visible {
   }
 
   .timer-display {
-    font-size: 4.1rem;
+    font-size: 2.25rem;
+  }
+
+  .timer-form {
+    grid-template-columns: minmax(0, 1fr) 82px 44px;
+    gap: 7px;
+  }
+
+  .timer-add {
+    width: 44px;
+  }
+
+  .timer-body {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .timer-actions {
+    grid-template-columns: 1fr 1fr;
   }
 }
 

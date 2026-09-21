@@ -36,39 +36,51 @@
       <section class="card tasks-card" aria-labelledby="tasks-title">
         <div class="card-heading">
           <div>
-            <p class="card-kicker">TODAY</p>
-            <h2 id="tasks-title">To-do list</h2>
+            <p class="card-kicker">PLANNING</p>
+            <h2 id="tasks-title">To-do lists</h2>
           </div>
           <span id="task-count" class="count" aria-live="polite">0 tasks</span>
         </div>
 
+        <div class="task-tabs" role="tablist" aria-label="To-do list period">
+          <button id="daily-tab" class="task-tab active" type="button" role="tab" aria-selected="true" aria-controls="task-list" data-period="daily">Daily</button>
+          <button id="weekly-tab" class="task-tab" type="button" role="tab" aria-selected="false" aria-controls="task-list" data-period="weekly">Weekly</button>
+          <button id="monthly-tab" class="task-tab" type="button" role="tab" aria-selected="false" aria-controls="task-list" data-period="monthly">Monthly</button>
+        </div>
+
         <form id="task-form" class="task-form">
           <label class="sr-only" for="task-input">Add a task</label>
-          <input id="task-input" type="text" maxlength="120" placeholder="Add a task…" autocomplete="off" required>
+          <input id="task-input" type="text" maxlength="120" placeholder="Add a daily task…" autocomplete="off" required>
           <button type="submit" aria-label="Add task">+</button>
         </form>
 
-        <ul id="task-list" class="task-list" aria-label="Tasks"></ul>
-        <p id="task-empty" class="empty-state">Nothing on your list yet.</p>
+        <ul id="task-list" class="task-list" role="tabpanel" aria-labelledby="daily-tab" aria-label="Daily tasks"></ul>
+        <p id="task-empty" class="empty-state">Nothing on your daily list yet.</p>
       </section>
 
       <section class="card timer-card" aria-labelledby="timer-title">
         <div class="card-heading">
           <div>
             <p class="card-kicker">FOCUS</p>
-            <h2 id="timer-title">Pomodoro</h2>
+            <h2 id="timer-title">Timers</h2>
           </div>
-          <span id="timer-status" class="status-dot">Ready</span>
+          <span id="timer-count" class="count" aria-live="polite">1 timer</span>
         </div>
 
-        <div class="timer-display" role="timer" aria-live="off" aria-label="Pomodoro time remaining">
-          <span id="timer-minutes">25</span><span class="timer-colon">:</span><span id="timer-seconds">00</span>
-        </div>
+        <form id="timer-form" class="timer-form">
+          <div class="timer-field timer-name-field">
+            <label for="timer-name">Name</label>
+            <input id="timer-name" type="text" maxlength="40" placeholder="Timer name" autocomplete="off" required>
+          </div>
+          <div class="timer-field timer-duration-field">
+            <label for="timer-duration">Minutes</label>
+            <input id="timer-duration" type="number" min="1" max="1440" step="1" value="25" inputmode="numeric" required>
+          </div>
+          <button class="timer-add" type="submit" aria-label="Create timer">+</button>
+        </form>
 
-        <div class="timer-actions">
-          <button id="timer-toggle" class="primary-button" type="button">Start</button>
-          <button id="timer-reset" class="secondary-button" type="button">Reset</button>
-        </div>
+        <div id="timer-list" class="timer-list" aria-label="Timers"></div>
+        <p id="timer-empty" class="empty-state hidden">Create a timer to get started.</p>
       </section>
 
       <section class="card notes-card" aria-labelledby="notes-title">
