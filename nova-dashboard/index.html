@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090c10">
+  <meta name="description" content="Nova Dashboard — a focused personal workspace for tasks, notes, and time.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23090c10'/%3E%3Cpath d='M32 10l5.8 16.2L54 32l-16.2 5.8L32 54l-5.8-16.2L10 32l16.2-5.8L32 10z' fill='%237cf7d4'/%3E%3C/svg%3E">
+  <title>Nova Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+
+  <main class="dashboard">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Nova Dashboard home">
+        <span class="brand-mark" aria-hidden="true">✦</span>
+        <span>Nova</span>
+      </a>
+
+      <div class="date-time" aria-live="off">
+        <p id="current-date" class="current-date"></p>
+        <time id="current-time" class="current-time"></time>
+      </div>
+    </header>
+
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow">PERSONAL DASHBOARD</p>
+      <h1 id="page-title">Make space for what matters.</h1>
+    </section>
+
+    <div class="widget-grid">
+      <section class="card tasks-card" aria-labelledby="tasks-title">
+        <div class="card-heading">
+          <div>
+            <p class="card-kicker">TODAY</p>
+            <h2 id="tasks-title">To-do list</h2>
+          </div>
+          <span id="task-count" class="count" aria-live="polite">0 tasks</span>
+        </div>
+
+        <form id="task-form" class="task-form">
+          <label class="sr-only" for="task-input">Add a task</label>
+          <input id="task-input" type="text" maxlength="120" placeholder="Add a task…" autocomplete="off" required>
+          <button type="submit" aria-label="Add task">+</button>
+        </form>
+
+        <ul id="task-list" class="task-list" aria-label="Tasks"></ul>
+        <p id="task-empty" class="empty-state">Nothing on your list yet.</p>
+      </section>
+
+      <section class="card timer-card" aria-labelledby="timer-title">
+        <div class="card-heading">
+          <div>
+            <p class="card-kicker">FOCUS</p>
+            <h2 id="timer-title">Pomodoro</h2>
+          </div>
+          <span id="timer-status" class="status-dot">Ready</span>
+        </div>
+
+        <div class="timer-display" role="timer" aria-live="off" aria-label="Pomodoro time remaining">
+          <span id="timer-minutes">25</span><span class="timer-colon">:</span><span id="timer-seconds">00</span>
+        </div>
+
+        <div class="timer-actions">
+          <button id="timer-toggle" class="primary-button" type="button">Start</button>
+          <button id="timer-reset" class="secondary-button" type="button">Reset</button>
+        </div>
+      </section>
+
+      <section class="card notes-card" aria-labelledby="notes-title">
+        <div class="card-heading">
+          <div>
+            <p class="card-kicker">QUICK CAPTURE</p>
+            <h2 id="notes-title">Notes</h2>
+          </div>
+          <span id="notes-status" class="save-status" aria-live="polite">Saved locally</span>
+        </div>
+
+        <label class="sr-only" for="notes-input">Personal notes</label>
+        <textarea id="notes-input" maxlength="5000" placeholder="Write down a thought…"></textarea>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
